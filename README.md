@@ -17,7 +17,7 @@ The github must have something similar to the following structure:
 │   └── answers/results
 │       └── ...
 └── Slides
-    └── workshopslides.pdf
+    └── workshopslides.pdf #using the pptx template provided
 ``` 
 
 It is required to provide at least:
