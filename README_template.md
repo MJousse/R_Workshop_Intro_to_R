@@ -21,8 +21,8 @@ We will be using the unix terminal to run our analyses. so be sure you have acce
    
 ## Small Outline/Structure (with link to exercises in colab if applicable)
 i.e. 
-* topic 
-   exercise - link to colab
+* topic
+   - exercise - link to colab
 
 ## References
 *<Material Author/Adapted from disclaimer>*
