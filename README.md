@@ -3,23 +3,26 @@
 ### Structure and content
 The github must have something similar to the following structure:
 
-.
+```
 ├── README.md # workshop overview, requirements and software, links to colab if used/etc
 ├── Exercises
 │   ├── data
 │   │   └── datafile1
+│   │   └── ...
 │   ├── scripts
+│   │   └── Exercise1.md and .html
 │   │   └── script1.sh/py/r
 │   └── answers/results
-│
+│       └── ...
 └── Slides
     └── workshopslides.pdf
-    
+``` 
+
 It is required to provide at least:
 * Slides
 * Scripts
 * Data
-* 
+
 > Every workshop will have its own best way of providing scripts and data. Be mindful and organized so participants can easily access everything as the workshop proceeds (scripts, data and results must me reachable). Do not assume they will know where to find the data or where to store the results!!
 
 ### Recommendations
@@ -30,8 +33,8 @@ It is required to provide at least:
 * Be mindful about the dataset size and computational times in normal computers as not everyone will have the same computer power. Provide the smallest possible dataset to have results: subsets of the genome, small tables/txts files, etc.
 
 #### For command-line UNIX-based workshops 
-* Provide the code in a markdown format (html or pdf) so that participants can copy and paste the commands directly to the terminal
-* If handson exercises are free code, provide a md document (html or pdf) with the question, code answer(s) and output 
+* Provide the code in a markdown format (and html or pdf) so that participants can copy and paste the commands directly to the terminal
+* If handson exercises are free code, provide a md document (and html or pdf) with the question, code answer(s) and output 
 * For more advanced workshops and if required (i.e as part of a pipeline), .sh scripts can be provided
 
 #### For python-based workshops
