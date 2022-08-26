@@ -16,8 +16,10 @@ The github must have something similar to the following structure:
 │   │   └── script1.sh/py/r
 │   └── answers/results
 │       └── ...
-└── Slides
-    └── workshopslides.pdf #using the pptx template provided
+├── Slides
+│   └── workshopslides.pdf #using the pptx template provided
+└── Outline
+    └── workshopoutline.pdf #usind the template provided
 ``` 
 
 It is required to provide at least:
