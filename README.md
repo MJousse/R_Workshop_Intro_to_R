@@ -19,7 +19,7 @@ The github must have something similar to the following structure:
 ├── Slides
 │   └── workshopslides.pdf #using the pptx template provided
 └── Outline
-    └── workshopoutline.pdf #usind the template provided
+    └── workshopoutline.pdf #using the template provided
 ``` 
 
 It is required to provide at least:
