@@ -32,7 +32,7 @@ It is required to provide at least:
 > Each workshop will have its own needs, so these are only broad recommendations. Consider the organization of the code and legibility as a must. If possible avoid expaining on top a sh/py/r scripts without annotations/clear documentation and use notebooks with separated blocks.
 
 #### Data
-* Be mindful about the dataset size and computational times in normal computers as not everyone will have the same computer power. Provide the smallest possible dataset to have results: subsets of the genome, small tables/txts files, etc.
+* Be mindful about the dataset size and computational times in normal computers as not everyone will have the same computational power. Provide the smallest possible dataset to have results: subsets of the genome, small tables/txts files, etc.
 
 #### For command-line UNIX-based workshops 
 * Provide the code in a markdown format (and html or pdf) so that participants can copy and paste the commands directly to the terminal
