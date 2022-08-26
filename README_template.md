@@ -13,12 +13,18 @@ We will be using the unix terminal to run our analyses. so be sure you have acce
 * Windows users: 
     * Option 1: Download a [unix subsystem (WSL)](https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-10#1-overview) **recommended
     * Option 2: Download [MobaXterm](https://mobaxterm.mobatek.net/)
-
+   
 ## Sofware <List of software that will be used during the workshop>
 * [Software1](link to installation instructions)
 * [Software2](link to installation instructions)
+* Instructions to open colab, etc.
+   
+## Small Outline/Structure (with link to exercises in colab if applicable)
+i.e. 
+* topic 
+   exercise - link to colab
 
-*Workshop created as part of the McGill Initiative in Computational Medicine*
-
+## References
 *<Material Author/Adapted from disclaimer>*
    
+*Workshop created as part of the McGill Initiative in Computational Medicine*
