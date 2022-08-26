@@ -1,5 +1,8 @@
-# <Workshop name>
+# Workshop name
 
+## Overview
+<Add a brief description and objectives of the workshop here>
+   
 ## Requirements
 <Add computational/knowledge requirements here>
 
@@ -12,8 +15,8 @@ We will be using the unix terminal to run our analyses. so be sure you have acce
     * Option 2: Download [MobaXterm](https://mobaxterm.mobatek.net/)
 
 ## Sofware <List of software that will be used during the workshop>
-* [Software1](link to installation)
-* [Software2](link to installation)
+* [Software1](link to installation instructions)
+* [Software2](link to installation instructions)
 
-
-
+*Material Author/Adapted from disclaimer*
+   
