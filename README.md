@@ -37,15 +37,15 @@ It is required to provide at least:
 * If handson exercises are free-code or fill in the blank, provide a different set of notebooks with the answers
 * For more advanced workshops and if required, .py scripts can be provided
 
-### For R-based workshops
+#### For R-based workshops
 * Use of R-markdown notebooks in Rstudio is suggested, adding annotations for each part of the code.
 * If handson are free-code or fill in the blank, provide a different set of notebooks with the answers
 * For more advanced workshops and if required (i.e as part of a pipeline), .r scripts can be provided
 
-### Multi-tool workshops
+#### Multi-tool workshops
 Some workshops will require the usage of the command-line and R or python for further processing as part of a pipeline (i.e PRS and omics workshops). 
 If possible, run shell commands inside the python/R notebooks; if not, provide a clear pipeline structure, i.e. as a notebook, so participants can follow each step.
 
-> Each workshop will have its own needs, so these are only broad recommendations. Consider the organization of the code and legibility as a must. If possible do not to expain over a sh/py/r script without annotations/clear documentation.
+> Each workshop will have its own needs, so these are only broad recommendations. Consider the organization of the code and legibility as a must. If possible avoid expaining on top a sh/py/r scripts without annotations/clear documentation and use notebooks with separated blocks.
 
 
