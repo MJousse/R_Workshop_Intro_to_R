@@ -19,10 +19,12 @@ It is required to provide at least:
 * Slides
 * Scripts
 * Data
-
-> Every workshop will have its own best way of providing scripts, be mindful and organized so participants can easily access everything as the workshop proceeds.
+* 
+> Every workshop will have its own best way of providing scripts and data. Be mindful and organized so participants can easily access everything as the workshop proceeds (scripts, data and results must me reachable). Do not assume they will know where to find the data or where to store the results!!
 
 ### Recommendations
+
+> Each workshop will have its own needs, so these are only broad recommendations. Consider the organization of the code and legibility as a must. If possible avoid expaining on top a sh/py/r scripts without annotations/clear documentation and use notebooks with separated blocks.
 
 #### Data
 * Be mindful about the dataset size and computational times in normal computers as not everyone will have the same computer power. Provide the smallest possible dataset to have results: subsets of the genome, small tables/txts files, etc.
@@ -45,7 +47,5 @@ It is required to provide at least:
 #### Multi-tool workshops
 Some workshops will require the usage of the command-line and R or python for further processing as part of a pipeline (i.e PRS and omics workshops). 
 If possible, run shell commands inside the python/R notebooks; if not, provide a clear pipeline structure, i.e. as a notebook, so participants can follow each step.
-
-> Each workshop will have its own needs, so these are only broad recommendations. Consider the organization of the code and legibility as a must. If possible avoid expaining on top a sh/py/r scripts without annotations/clear documentation and use notebooks with separated blocks.
 
 
