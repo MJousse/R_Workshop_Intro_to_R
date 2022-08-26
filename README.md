@@ -6,7 +6,7 @@ Provide the github link to participants for easy access to the data and sharing 
 The github must have something similar to the following structure:
 
 ```
-├── README.md # See the README template provided : workshop overview, requirements and software, links to colab if used/etc
+├── README.md # workshop overview, requirements and software, links to colab if used/etc. See README_template
 ├── Exercises
 │   ├── data
 │   │   └── datafile1
