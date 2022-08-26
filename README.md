@@ -1,4 +1,4 @@
-# Workshop Github Templates
+# Workshop Github template and code recommendations
 
 Provide the github link to participants for easy access to the data and sharing the material. 
 
