@@ -17,7 +17,7 @@ We will be using the unix terminal to run our analyses. so be sure you have acce
 ## Sofware <List of software that will be used during the workshop>
 * [Software1](link to installation instructions)
 * [Software2](link to installation instructions)
-* Instructions to open colab, etc.
+* Instructions to open colab, Rlibraries, etc.
    
 ## Small Outline/Structure (with link to exercises in colab if applicable)
 i.e. 
