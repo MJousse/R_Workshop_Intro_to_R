@@ -20,5 +20,5 @@ We will be using the unix terminal to run our analyses. so be sure you have acce
 
 *Workshop created as part of the McGill Initiative in Computational Medicine*
 
-*Material Author/Adapted from disclaimer*
+*<Material Author/Adapted from disclaimer>*
    
