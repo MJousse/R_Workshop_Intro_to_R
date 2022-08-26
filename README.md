@@ -18,5 +18,7 @@ We will be using the unix terminal to run our analyses. so be sure you have acce
 * [Software1](link to installation instructions)
 * [Software2](link to installation instructions)
 
+*Workshop created as part of the McGill Initiative in Computational Medicine*
+
 *Material Author/Adapted from disclaimer*
    
