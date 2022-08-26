@@ -20,7 +20,6 @@ We will be using the unix terminal to run our analyses. so be sure you have acce
 * Instructions to open colab, Rlibraries, etc.
    
 ## Small Outline/Structure (with link to exercises in colab if applicable)
-i.e. 
 * topic
    - exercise - link to colab
 
