@@ -1,5 +1,7 @@
 # Workshop Github Templates
 
+Provide the github link to participants for easy access to the data and sharing the material. 
+
 ### Structure and content
 The github must have something similar to the following structure:
 
