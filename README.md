@@ -55,4 +55,6 @@ It is required to provide at least:
 Some workshops will require the usage of the command-line and R or python for further processing as part of a pipeline (i.e PRS and omics workshops). 
 If possible, run shell commands inside the python/R notebooks; if not, provide a clear pipeline structure, i.e. as a notebook, so participants can follow each step.
 
+#### Go back to [main page](https://mcgill-micm.github.io/)
+
 
