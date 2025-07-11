@@ -1,0 +1,124 @@
+---
+title: "Intro to R"
+author: 
+- name: "Adrien Osakwe"
+  affiliation: Workshop Lead
+- name: Larisa M. Soto
+  affiliation: Original Material
+- name: Xiaoqi Xie
+  affiliation: Contributor
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+   rmdformats::html_clean:
+    toc: true
+    thumbnails: false
+    highlight: kate
+    use_bookdown: true
+    code_folding: hide
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Solutions \|\| Data Types
+
+```{r, echo=FALSE, out.width="80%",fig.align='center'}
+knitr::include_graphics("images/MiCM_Logo.png")
+```
+
+## Atomic Classes
+
+1.  Write a piece of code that stores a number in a variable and then check if it is greater than 5. Try to use comments!
+2.  Bonus: Is there a way to store the result after checking the number?
+
+```{r}
+
+x <- 10
+x > 5
+
+#Bonus
+y <- x > 5
+
+print(y)
+```
+
+### 
+
+## Vectors
+
+Make a vector with the numbers 1 through 26. Multiply the vector by 2, and give the resulting vector names A through Z (hint: there is a built in vector called LETTERS).
+
+```{r}
+x <- 1:26
+x <- x * 2
+names(x) <- LETTERS
+```
+
+## Matrices
+
+Make a matrix with the numbers 1:50, with 5 columns and 10 rows. Did the matrix function fill your matrix by column, or by row, as its default behavior? Once you have figured it out, try to change the default. (hint: read the documentation for `matrix`)
+
+```{r}
+# By default the matrix is filled by columns, we can change this behavior using byrow=TRUE
+m<-matrix(1:50,ncol = 5,nrow = 10,byrow = T)
+```
+
+Bonus: Which of the following commands was used to generate the matrix below?
+
+-   `matrix(c(4, 1, 9, 5, 10, 7), nrow = 3)`
+-   `matrix(c(4, 9, 10, 1, 5, 7), ncol = 2, byrow = TRUE)`
+-   `matrix(c(4, 9, 10, 1, 5, 7), nrow = 2)`
+-   `matrix(c(4, 1, 9, 5, 10, 7), ncol = 2, byrow = TRUE)`
+
+```{r}
+matrix(c(4, 1, 9, 5, 10, 7), ncol = 2, byrow = TRUE)
+```
+
+## Lists
+
+Create a list of length two containing a character vector for each of the data sections: (1) Data types and (2) Data structures. Populate each character vector with the names of the data types and data structures, respectively.
+
+```{r}
+dt <- c('double', 'complex', 'integer', 'character', 'logical')
+ds <- c('data.frame', 'vector', 'factor', 'list', 'matrix')
+data.sections <- list(dt, ds)
+```
+
+## Data frames
+
+There are several subtly different ways to call variables, observations and elements from data frames. Try them all and discuss with your team what they return. (Hint, use the function `typeof()`)
+
+-   `iris[1]`
+-   `iris[[1]]`
+-   `iris$Species`
+-   `iris["Species"]`
+-   `iris[1,1]`
+-   `iris[,1]`
+-   `iris[1,]`
+
+```{r,eval=F}
+# The single brace [1] returns the first slice of the list, as another list. In this case it is the first column of the data frame.
+iris[1]
+# The double brace [[1]] returns the contents of the list item. In this case it is the contents of the first column, a vector of type factor.
+iris[[1]]
+# This example uses the $ character to address items by name. Species is a vector of type factor.
+iris$Species
+# A single brace ["Species"] instead of the index number with the column name will also return a list like in the first example
+iris["Species"]
+# First element of first row and first column. The returned element is an integer
+iris[1,1]
+# First column. Returns a vector
+iris[,1]
+# First row. Returns a list with all the values in the first row.
+iris[1,]
+```
+
+## Coercion
+
+Take the list you created in 3 and coerce it into a data frame. Then change the names of the columns to "dataTypes" and "dataStructures"
+
+```{r}
+df<-as.data.frame(data.sections)
+colnames(df)<-c("dataTypes","dataStructures")
+```

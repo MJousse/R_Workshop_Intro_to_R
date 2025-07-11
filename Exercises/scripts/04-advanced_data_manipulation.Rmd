@@ -1,0 +1,60 @@
+---
+title: "Intro to R"
+author: 
+- name: "Adrien Osakwe"
+  affiliation: Workshop Lead
+- name: Larisa M. Soto
+  affiliation: Original Material
+- name: Xiaoqi Xie
+  affiliation: Contributor
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+   rmdformats::html_clean:
+    toc: false
+    thumbnails: false
+    highlight: kate
+    use_bookdown: true
+    code_folding: hide
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,eval=TRUE)
+```
+
+# Solutions || Adv. Data Manipulation
+```{r, echo=FALSE, out.width="80%",fig.align='center'}
+knitr::include_graphics("images/MiCM_Logo.png")
+```
+
+```{r}
+suppressPackageStartupMessages(library(gapminder))
+suppressPackageStartupMessages(library(dplyr))
+```
+
+Write one command ( can span multiple lines) using pipes that will output a data frame that has only the columns `lifeExp`, `country` and `year` for the records before the year 2000 from African countries, but not for other Continents.
+
+```{r}
+tidy_africa <- gapminder %>%
+                dplyr::filter(continent == "Africa") %>%
+                dplyr::select(year, country, lifeExp)
+head(tidy_africa)
+```
+
+Calculate the average life expectancy per country. Which country has the longest average life expectancy and which one the shortest average life expectancy?
+
+```{r}
+gapminder %>%
+   dplyr::group_by(country) %>%
+   dplyr::summarize(mean_lifeExp = mean(lifeExp)) %>%
+   dplyr::filter(mean_lifeExp == min(mean_lifeExp) | mean_lifeExp == max(mean_lifeExp))
+```
+
+In the previous hands-on you discovered that all the entries from 2007 are actually from 2008. Write a command to edit the data accordingly using pipes. In the same command filter only the entries from 2008 to verify the change.
+
+```{r}
+gapminder %>%
+  dplyr::mutate(year = ifelse(year==2007,2008,year)) %>%
+  dplyr::filter(year==2008) %>%
+  head()
+```
+

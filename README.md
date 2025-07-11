@@ -1,87 +1,108 @@
-# QLS-MiCM Workshop Onboarding Procedure
+# Introduction to programming in R
 
-The following instructions detail how QLS-MiCM workshop leads can submit new workshop materials or make contributions to existing material in our GitHub organization page. The outline approach will be used henceforth to improve the transparency and efficiency of our review process.
+## Overview
 
-## <ins>Submissions for New Workshops
+This workshop is beginner-level introduction to programming in R. The course is designed to be taught in one session of 4 hours and is focused on the application of R to the analysis of tabular data from medical datasets.
 
-### 1. Creating a new GitHub Repo
+## Prior knowledge
 
-Access our [Workshop Repo Template](https://github.com/QLS-MiCM/Workshop_Template) and select the green "Use this template" button at the top-right to create a fresh repo for your workshop materials with the appropriate formatting.
+-   No previous programming experience is required.
+-   Please review the following topics if you're not comfortable with them:
+    -   basic linear algebra (operations with vectors and metrices)
+    -   mathematical operations (exponentials, logarithms)
+    -   basic statistics (mean, variance, median, standard deviation)
+    -   logical statements (AND, OR, NOT)
 
-The repo will have the following structure: 
+## Sofware requirements
+
+-   [R \>4.0](https://www.r-project.org)
+-   [RStudio](https://www.rstudio.com/products/rstudio/download/)
+
+Once you have setup R and RStudio copy the code below to install the packages required for the workshop.
+
+```{r}
+install.packages(c("data.table","datasets","devtools","dplyr","ggplot2","plyr","medicaldata","gapminder","RColorBrewer","rmarkdown","stringr","tidyr","tidyverse","viridis"))
 ```
-├── README.md # workshop overview, requirements and software, links to colab if used/etc. See README_template
-├── Exercises
-│   ├── data
-│   │   └── datafile1
-│   │   └── ...
-│   ├── scripts
-│   │   └── Exercise1.md and .html
-│   │   └── script1.sh/py/r
-│   └── answers/results
-│       └── ...
-├── Slides
-│   └── workshopslides.pdf #using the pptx template provided
-└── Outline
-    └── workshopoutline.pdf #using the template provided
-```
-It is required to provide at least the following content:
 
--   READE.md (this MUST include a brief outline, prerequisites and setup instructions)
+## Workshop Outline
 
--   Slides
+### 1. R basics
 
--   Scripts
+In the first module of the workshop, the goals are to (1) familiarize with the language and the logic behind it; (2) Get started with R studio and create your first project; (3) Configure the working directory with a common standard structure; (4) Create your first `.R` file to write down the live code; (5) Compute arithmetic operations; (6) Use logical operators; (7) Get fluent in R's console; (8) Learn how to ask for help within R ; and (9) get comfortabble with installing packages.
 
--   Data
+**Module content:**
 
-> Every workshop will have its own best way of providing scripts and data. Be mindful and organized so participants can easily access everything as the workshop proceeds (scripts, data and results must me reachable). Do not assume they will know where to find the data or where to store the results!!
+-   Syntax
+-   Aritmetic Operations
+-   Creating variables
+-   Logical operators
+-   Seeking help
+-   Installing packages
+-   Hands on: basics
 
-### 2. Submitting Workshop Materials
+### 2. Data types: attributes and built-in functions
 
-After completing your draft materials, submit an issue to [the workshop template page](https://github.com/QLS-MiCM/Workshop_Template/issues) with the **workshop name and date** as the title. From here, our academic team will review the materials and share constructive feedback as is required. After the materials are deemed complete, a new repo page will be made within the QLS-MiCM organization from which participants will access the materials.
+In this section participants will (1) understand the differences between classes, objects and data types in R; (2) create objects of different types, learn about their attributes and apply some built-in functions in R; (3) Subset and index objects; and (4) get comfortable with vectorized operations.
 
-## <ins>Contributing to existing Workshop Materials
+**Module content:**
 
-### 1. Fork the Original Workshop Repo
+-   Vectors
+-   Lists
+-   Factors
+-   Data frames
+-   Arrays
+-   Coercion
+-   Hands-on: data types
 
-If the workshop you are leading already has pre-existing material, you can access the existing repository and create a fork. From there, you can make the changes you plan to make.
+### 3. Basic data manipulation
 
-### 2. Submit a Pull Request
+In this module participants will (1) learn how to read/write data to/from files with different formats (.tsv, .csv); (2) become familiar with basic data-frame operations; (3) index and subset data frames using base R; (4) manipulate individual data frame columns; and (5) learn how to join columns and rows of different data frames using base R.
 
-After completing your changes, you can submit a pull request to the original repository. Please ensure to include a description of the changes made. Our academic team will then review the changes and provide feedback as needed. Once all of the feedback is addressed, the pull request will be approved and merged.
+**Module content:**
 
-## Additional Guidelines
+-   Reading/writing data
+-   Exploring data frames
+-   Hands-on: basic data manipulation
 
-### Recommendations
+### 4. Advanced data manipulation
 
-> Each workshop will have its own needs, so these are only broad recommendations. Consider the organization of the code and legibility as a must. If possible avoid expaining on top a sh/py/r scripts without annotations/clear documentation and use notebooks with separated blocks.
+The fourth module participants will (1) familiarize with the dplyr syntax; (2) create pipes with the operator `%>%`; (3) perform operations on data frames using dplyr and tidyr functions; and (4) implement functions from external packages by reading their documentation in R
 
-#### Data
+**Module content:**
 
-> Be mindful about the dataset size and computational times in normal computers as not everyone will have the same computational power. Provide the smallest possible dataset to have results: subsets of the genome, small tables/txts files, etc.
+-   Handling data frames with dplyr
+-   Other useful packages
+-   Hands-on: advanced data manipulation
 
-#### For command-line UNIX-based workshops
+### 5. Generating visual outputs
 
--   Provide the code in a markdown format (and html or pdf) so that participants can copy and paste the commands directly to the terminal
--   If handson exercises are free code, provide a md document (and html or pdf) with the question, code answer(s) and output
--   For more advanced workshops and if required (i.e as part of a pipeline), .sh scripts can be provided
+This section will show participants how to (1) Create basic plots using base R functions; (2) Understand how to connect data frames with ggplot2; (3) create basic graphs with ggplot2; (4) use factors to customize graphics in ggplot2; (5) use RMarkdown to generate customized reports.
 
-#### For python-based workshops
+**Module content:**
 
--   Use of google-colab notebooks is suggested, adding annotations for each part of the code.
--   If handson exercises are free-code or fill in the blank, provide a different set of notebooks with the answers
--   For more advanced workshops and if required, .py scripts can be provided
+-   Figures with base R
+-   Graphics with `ggplot2`
 
-#### For R-based workshops
+### 6. Real life application: COVID testing dataset
 
--   Use of R-markdown or Quarto notebooks in Rstudio is suggested, adding annotations for each part of the code.
--   If hands-on are free-code or fill in the blank, provide a different set of notebooks with the answers
--   For more advanced workshops and if required (i.e as part of a pipeline), .r scripts can be provided
+This hands-on activity will familiarize participants with a real-life use of R in the pharma industry environment and encorage them to apply the knowledge from previous modules to create an analysis pipeline.
 
-#### Multi-tool workshops
+### 7. Software development concepts
 
-Some workshops will require the usage of the command-line and R or python for further processing as part of a pipeline (i.e PRS and omics workshops). If possible, run shell commands inside the python/R notebooks; if not, provide a clear pipeline structure, i.e. as a notebook, so participants can follow each step.
+To conclude the workshop, participants will (1) acquire good coding practices; (2) be familiar with code documentation standatds; (3) know what to avoid when programming in R; (4) learn how to debug and troubbleshoot their own code.
 
+**Module content:**
 
+-   Good coding practices\
+-   Style guide\
+-   Debugging and troubleshooting
 
+## References
+
+The materials for this workshop were based on the following sources:
+
+-   [Base R Cheat Sheet](https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf)\
+-   [Google's R Style Guide](https://google.github.io/styleguide/Rguide.html)
+-   [Mastering Software Development in R](https://bookdown.org/rdpeng/RProgDA/)
+
+*Workshop created as part of the McGill Initiative in Computational Medicine*

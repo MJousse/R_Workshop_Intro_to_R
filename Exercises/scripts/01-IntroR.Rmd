@@ -1,0 +1,1589 @@
+---
+title: "Intro to R"
+author: 
+- name: "Adrien Osakwe"
+  affiliation: Workshop Lead
+- name: Larisa M. Soto
+  affiliation: Original Material
+- name: Xiaoqi Xie
+  affiliation: Contributor
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+   rmdformats::html_clean:
+    toc: true
+    thumbnails: false
+    floating: true
+    highlight: kate
+    use_bookdown: true
+---
+
+```{r, echo=FALSE, out.width="80%",fig.align='center'}
+knitr::include_graphics("images/MiCM_Logo.png")
+```
+
+# Introduction to R
+
+This workshop is beginner-level introduction to programming in R. The course is designed to be taught in two sessions of 3 hours each and is focused on the application of R to the analysis of tabular data from clinical trials.
+
+## R Markdown File
+
+R Markdown files act as notebooks which can make it easier to document and share code. All the results from the code as well as your comments and descriptions can be combined into one, tidy document. This makes it easy to combine insights, protocols and figures in a practical and organized fashion.
+
+## **Learning objectives**
+
+-   Basic Operations in R
+
+-   R Markdown vs. R Script
+
+-   RStudio IDE
+
+## **Comments**
+
+Comments are embedded into your code to help explain its purpose. This is extremely important for reproducibility and for documentation.
+
+```{r}
+# This is a comment line 
+# print('hello world')
+```
+
+## Syntax
+
+```{r, echo=FALSE, out.width="80%",fig.align='center'}
+knitr::include_graphics("images/SyntaxOperators.png")
+```
+
+## Creating variables
+
+```{r}
+# The convention is to use left hand assignation 
+var1 <- 12
+var2 <- "hello world"
+```
+
+## Printing Variables
+
+```{r}
+var1
+var2
+
+print(var1)
+print(var2)
+```
+
+```{r}
+# It is also possible to use the '=' sign, but is NOT a good practice
+var1 = 13
+var2 = "hello world"
+var1
+var2
+rm("var1")
+```
+
+# Data types and data structures
+
+**Learning objectives**
+
+1.  Understand the differences between classes, objects and data types in R
+2.  Create objects of different types
+3.  Subset and index objects
+4.  Learn and use vectorized operations
+
+## Data Types
+
+```{r, echo=FALSE, out.width="80%",fig.align='center'}
+knitr::include_graphics("images/DataTypes.png")
+```
+
+## Atomic Classes
+
+Atomic classes are the fundamental data type found in R. All subsequent data structures are used to store entries of different atomic classes.
+
+### Numeric
+
+They store numbers as `double`, and it is stored with decimals. The term double refers to the number of bytes required to store it. Each double is accurate up to 16 significant digits.
+
+### Integer
+
+They store numbers that can be written without a decimal component. Adding an *L* after an integer tells R to store it as an integer class instead of a numeric
+
+### Logical
+
+They store the outputs of logical statements - TRUE or FALSE. Can be converted to integer where TRUE = 1 and FALSE = 0.
+
+### Character
+
+Represents text. Can either be a single character or a word/sentence.
+
+### Missing Value
+
+Used by R to indicate a missing data entry. Useful for manipulating data sets where missing entries are common.
+
+## Arithmetic Operations
+
+```{r, echo=FALSE, out.width="60%",fig.align='center'}
+knitr::include_graphics("images/ArithmeticOperators.png")
+```
+
+```{r}
+# Additon  
+2+100000
+```
+
+```{r}
+# Subtraction  
+3-5
+```
+
+```{r}
+# Multiplication  
+71*9
+```
+
+```{r}
+# Division  
+90/((3*5) + 4)
+```
+
+```{r}
+# Power  
+2^3
+```
+
+## Logical operators
+
+```{r, echo=FALSE, out.width="80%",fig.align='center'}
+knitr::include_graphics("images/LogicalOperators.png")
+```
+
+```{r}
+# First create two numeric variables  
+var1 <- 35  
+var2 <- 27
+```
+
+```{r}
+# Equal to  
+var1 == var2
+```
+
+```{r}
+# Less than or equal to  
+var1 <= var2   
+var1 != var2
+```
+
+```{r}
+# They also work with other classes  
+var1 <- "mango" 
+var2 <- "mangos"
+```
+
+```{r}
+var1 == var2
+```
+
+Strings are compared character by character until they are not equal or there are no more characters left to compare.
+
+```{r}
+var1 < var2
+```
+
+We can test if a variable is contained in another object
+
+```{r}
+"c" %in% letters  
+"c" %in% LETTERS
+```
+
+## Exercise
+
+1.  Write a piece of code that stores a number in a variable and then check if it is greater than 5. Try to use comments!
+2.  Bonus: Is there a way to store the result of checking if the number is greater than 5?
+
+```{r}
+```
+
+## Data Structures
+
+```{r, echo=FALSE, out.width="80%",fig.align='center'}
+knitr::include_graphics("images/DataStructures.png")
+```
+
+```{r, echo=FALSE, out.width="80%",fig.align='center'}
+knitr::include_graphics("images/1D_DataStructures.png")
+```
+
+## Vectors
+
+Key points:\
+- Can only contain objects of the same class\
+- Most basic type of R object\
+- Variables are vectors
+
+```{r, echo=FALSE, out.width="80%",fig.align='center'}
+knitr::include_graphics("images/Vectors.png")
+```
+
+### Numeric
+
+Creating a numeric vector using `c()`
+
+```{r}
+x <- c(0.3, 0.1)
+x
+```
+
+Using the `vector()` function
+
+```{r}
+x <- vector(mode = "numeric",length = 10)
+x
+```
+
+Using the `numeric()` function
+
+```{r}
+x <- numeric(length = 10)
+x
+```
+
+Creating a numeric vector with a sequence of numbers
+
+```{r}
+# x <- seq(1,10,1)
+# x
+
+x <- seq(1,10,2)
+x
+
+x <- rep(2,10)
+x
+```
+
+Check length of vector with `length()`
+
+```{r}
+x
+length(x)
+
+y <- rep(2,5)
+y
+length(y)
+
+length(x) == length(y)
+
+```
+
+### Integer
+
+Creating an integer vector using `c()`
+
+```{r}
+x <- c(1L,2L,3L,4L,5L)  
+x
+```
+
+Creating an integer vector of a sequences of numbers
+
+```{r}
+x <- 1:10
+x
+```
+
+### Logical
+
+Creating a logical vector with `c()`
+
+```{r}
+x <- c(TRUE,FALSE,T,F)
+x
+```
+
+Creating a logical vector with `vector()`
+
+```{r}
+x <- vector(mode = "logical",length = 5)
+x
+```
+
+Creating a logical vector using `logical()`
+
+```{r}
+x <- logical(length = 10)
+x
+```
+
+### Character
+
+```{r}
+x<-c("a","b","c")
+x
+
+x<-vector(mode = "character",length=10)
+x
+
+x<-character(length = 3)
+x
+```
+
+Some useful functions to modify strings
+
+```{r}
+tolower(LETTERS)
+toupper(letters)
+paste(letters,1:length(letters),sep="_") # Note the implicit coercion
+```
+
+### Vector attributes
+
+The elements of a vector can have names
+
+```{r}
+x<-1:5
+names(x)<-c("one","two","three","four","five")
+x
+
+x<-logical(length = 4)
+names(x)<-c("F1","F2","F3","F4")
+x
+```
+
+## Factors
+
+Key points:
+
+-   Useful when for categorical data
+-   Can have implicit order, if needed
+-   Each element has a label or level
+-   They are important in statistical modelling and plotting with ggplot
+-   Some operations behave differently on factors
+
+```{r, echo=FALSE, out.width="60%",fig.align='center'}
+knitr::include_graphics("images/Factors.png")
+```
+
+Creating factors with `factor`
+
+```{r}
+cols<-factor(x = c(rep("red",4),
+                   rep("blue",5),
+                   rep("green",2)),              
+             levels = c("red","blue","green"))
+cols
+```
+
+```{r}
+samples <- c("case", "control", "control", "case") 
+samples 
+samples_factor <- factor(samples, levels = c("control", "case")) 
+samples_factor 
+str(samples_factor)
+```
+
+## Exercise
+
+See what happens when you convert a factor to a numeric in the code chunk below. What do you get?
+
+```{r}
+
+#Take the samples variable and convert it to a numeric 
+
+#What function do you need to do this (hint: as.character() converts elements to character types)
+```
+
+### Built-in functions
+
+**To inspect the contents of a vector**
+
+```{r}
+is.vector(x) # Check if it is a vector
+is.na(x) # Check if it is empty
+is.null(x) # Check if it is NULL
+is.numeric(x) # Check if it is numeric
+is.logical(x) # Check if it is logical
+is.character(x) # Check if it is character
+```
+
+**To know what kind of vector you are working with**
+
+```{r}
+class(x) # Atomic class type
+typeof(x) # Object type or data structure (matrix, list, array...)
+str(x)
+```
+
+**To know more about the data contained in the vector**
+
+Mathematical operations
+
+```{r}
+sum(x)
+```
+
+```{r}
+min(x) 
+max(x)
+```
+
+```{r}
+x <- seq(1,10,1)
+mean(x) 
+median(x) 
+sd(x)
+```
+
+```{r}
+log(x) 
+exp(x)
+```
+
+Other operations
+
+```{r}
+length(x)
+table(x)
+summary(x)
+```
+
+Grouping elements in a vector using `tapply`
+
+```{r}
+measurements<-sample(1:1000,6) 
+samples<-factor(c(rep("case",3),rep("control",3)), 
+                levels = c("control", "case"))
+```
+
+```{r}
+tapply(measurements, samples, mean)
+```
+
+### Vector Operations
+
+```{r, echo=FALSE, out.width="80%",fig.align='center'}
+knitr::include_graphics("images/VectorOperations.png")
+```
+
+```{r}
+x<-1:10
+y<-11:20
+```
+
+```{r}
+x*2
+```
+
+```{r}
+x+y
+
+```
+
+```{r}
+x*y
+
+```
+
+```{r}
+x^y
+```
+
+### Recycling
+
+If one of the vectors is smaller than the other, operations are still possible. R will replicate the smaller vector to enable the operation to occur.
+
+**IMPORTANT: if the larger vector is NOT a multiple of the smaller vector, the replication will still occur but will end at the length of the larger vector.**
+
+```{r}
+x<-1:10
+y<-c(1,2,3)
+x+y
+```
+
+#### Exercise
+
+Calculate the sum of the following sequence of fractions:
+
+`x = 1/(1^2) + 1/(2^2) + 1/(3^2) + ... + 1/(n^2)`
+
+```{r}
+# n=100
+
+# n=10000
+
+```
+
+### Indexing and subsetting
+
+For this example, lets create a vector of random numbers from 1 to 100 of size 15.
+
+```{r}
+x<-sample(x = 1:100,size = 15,replace = F) 
+x
+```
+
+Using the index/position
+
+```{r}
+x[1] # Get the first element
+x[13] # Get the thirteenth element
+```
+
+Using a vector of indices
+
+```{r}
+x[1:12] # The first 12 numbers
+x[c(1,5,6,8,9,13)] # Specific positions only
+
+names(x) <- letters[1:length(x)]
+
+x[c('a','c','d')]
+```
+
+Using a logical vector
+
+```{r}
+# Only numbers that are less than or equal to 10
+x<10
+x[x>95] 
+# 
+# # Only even numbers 
+# x%%2 == 0
+# x[x%%2 == 0]
+```
+
+```{r}
+x<10
+x[x<=10] # Only numbers that are less than or equal to 10
+```
+
+Skipping elements using indices
+
+```{r}
+x[c(-1, -5)]
+```
+
+Skipping elements using names
+
+```{r}
+x<-1:10
+names(x)<-letters[1:10]
+x[names(x) != "a"]
+```
+
+#### Exercise
+
+Find all the odd numbers in `x`
+
+Hint: `3 %% 2 = 1` and `4 %% 2 = 0`
+
+```{r}
+
+```
+
+## Lists
+
+Key points:\
+- Can contain objects of multiple classes\
+- Extremely powerful when combined with some R built-in functions
+
+```{r, echo=FALSE, out.width="60%",fig.align='center'}
+knitr::include_graphics("images/Lists.png")
+```
+
+Creating lists with different data types
+
+```{r}
+l <- list(1:10, list("hello",'hi'), TRUE)
+l
+```
+
+Assigning names as we create the list
+
+```{r}
+l<-list(title = "Numbers", 
+        numbers = 1:10, 
+        logic = TRUE )
+l
+names(l)
+
+l$numbers
+```
+
+### Indexing and subsetting
+
+Using `[[]]` instead of `[]`
+
+```{r}
+l[[1]]
+```
+
+Using `$` for named lists
+
+```{r}
+l$logic
+```
+
+### Built-in functions
+
+```{r}
+l<-list(sample(1:100,10),
+        sample(1:100,10),
+        sample(1:100,10))
+names(l)<-c("r1","r2","r3")
+l
+```
+
+Performing operations on all elements of the list using `lapply`
+
+```{r}
+lsums<-lapply(l,sum)
+lsums
+
+lsums <- lapply(l,function(a){
+  sum(a)^2
+})
+lsums
+```
+
+## Matrices
+
+```{r, echo=FALSE, out.width="80%",fig.align='center'}
+knitr::include_graphics("images/Matrices.png")
+```
+
+Creating a matrix full of zeros with `matrix()`
+
+```{r}
+m<-matrix(0, ncol=6, nrow=3)
+m
+class(m)
+typeof(m)
+```
+
+Creating a matrix from a vector of numbers
+
+```{r}
+m<-matrix(1:5, ncol=2, nrow=5)
+m
+```
+
+### Attributes
+
+Names of each dimension
+
+```{r}
+colnames(m)<-letters[1:2]
+rownames(m)<-LETTERS[1:5]
+m
+str(m)
+```
+
+### Built-in functions
+
+To know the size of the matrix
+
+```{r}
+dim(m)
+ncol(m)
+nrow(m)
+```
+
+#### Exercise
+
+What do you think that `length(m)` will return?
+
+```{r}
+
+```
+
+## Data frames
+
+Key points:
+
+-   Columns in data frames are vectors\
+-   Each column can be of a different data type\
+-   A data frame is essentially a list of vectors
+
+```{r, echo=FALSE, out.width="70%",fig.align='center'}
+knitr::include_graphics("images/DataFrames.png")
+```
+
+Creating a data frame using `data.frame()`
+
+```{r}
+df<-data.frame(numbers=1:10,
+               low_letters=letters[1:10],
+               logical_values=rep(c(T,F),each=5))
+df
+class(df)
+typeof(df)
+str(df)
+```
+
+Re-naming columns
+
+```{r}
+colnames(df)[2]<-"lowercase"
+head(df)
+View(df)
+```
+
+### Indexing and sub-setting
+
+```{r}
+df$numbers
+df["numbers"]
+df[1,]
+df[,1]
+
+df[3,3]
+```
+
+## Coercion
+
+Converting between data types with `as.` functions
+
+```{r}
+x<-1:10
+as.list(x)
+```
+
+```{r}
+l<-list(numbers=1:10,
+        lowercase=letters[1:10])
+l
+typeof(l)
+df<-as.data.frame(l)
+df
+typeof(df)
+```
+
+## Hands on: Data types
+
+-   Make a matrix with the numbers 1:50, with 5 columns and 10 rows. Did the matrix function fill your matrix by column, or by row, as its default behavior?
+-   Create a list of length two containing a character vector for each of the data sections: (1) Data types and (2) Data structures. Populate each character vector with the names of the data types and data structures, respectively.\
+-   There are several subtly different ways to call variables, observations and elements from data frames. Try them all and discuss with your team what they return. (Hint, use the function `typeof()`)\
+-   Take the list you created in 3 and coerce it into a data frame. Then change the names of the columns to "dataTypes" and "dataStructures".
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+# Control Structures & Functions
+
+## Learning Objectives
+
+-   Understand If statements
+
+-   Understand for & while loops
+
+-   Create new functions & Install Packages
+
+## Conditional Statements
+
+We can tell our code to perform certain tasks **if** a certain condition is met.
+
+```{r}
+x <- 5
+
+#If the number is greater than 5, get its square
+if (x > 5){
+  x^2
+} else{
+  #If not, multiply it by 2
+  x*2
+}
+
+```
+
+```{r}
+# Can incorporate multiple conditions
+x <- 7
+
+if (x > 5 && x < 10){
+  #If x is greater than 5 AND is less than 10
+  x^2
+} else if ( x < 0 || x > 10){
+  #If x is less than 0 OR greater than 10
+  -x
+} else {
+  x * 2
+}
+```
+
+## For & While Loops
+
+For loops let you iterate over the elements of a vector
+
+```{r}
+#Iterate from 1 to 10
+
+for (i in 1:10){
+  print(i)
+}
+
+```
+
+```{r}
+#Iterate through strings
+x <- c('a','ab','cab','taxi')
+
+for (i in x){
+  print(i)
+}
+```
+
+While loops let you iterate over a piece of code until a condition is no longer met.
+
+```{r}
+x <- 5
+#while x is greater than 0
+while (x > 0){
+  print(x)
+  x <- x -1
+}
+```
+
+## Functions
+
+Sometimes, we need to repeatedly use a sequence of code. Creating functions helps reduce the amount of clutter in our code.
+
+```{r, echo=FALSE, out.width="80%",fig.align='center'}
+knitr::include_graphics("images/Functions.png")
+```
+
+```{r}
+#Example Function that calculates mean
+
+new_mean <- function(values){
+  print(values)
+  #return()
+  sum(values)/length(values)
+}
+
+x <- 1:5
+
+mean(x) == new_mean(x)
+```
+
+## Installing packages
+
+There are multiple sources and ways to do this.
+
+**CRAN**
+
+```{r,eval=FALSE}
+install.packages(c("dplyr","ggplot2","gapminder","medicaldata"))
+```
+
+**BioConductor**
+
+For more details about the project you can visit <https://www.bioconductor.org>
+
+To install packages from BioConductor you first need to install BioConductor itself.
+
+```{r,eval=F}
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install(version = "3.16")
+```
+
+Then you can install any package you want by using the `install`
+
+```{r,eval=F}
+BiocManager::install("DESeq2")
+```
+
+**GitHub**
+
+If you want to install the development version of a package, or you are installing something that is only available on GitHub you can use `devtools`
+
+```{r,eval=F}
+devtools::install_github('andreacirilloac/updateR')
+```
+
+```{r}
+library(ggplot2)
+```
+
+## Detour \|\| Seeking help
+
+The `?` operator in R allows you to get more information about different functions and objects. This will open up the 'help' pane in the bottom right of RStudio which will show the documentation for the function/object. This is a great way to get more information.
+
+Concatenate function
+
+```{r}
+?c()
+```
+
+Print the description of an object
+
+```{r}
+str(iris)
+```
+
+## Exercise
+
+Find the help page for the `rnorm` function. What does it do? Can you print its description? What does it say?
+
+```{r}
+#Find the help page for rnorm  
+
+#Print the description
+```
+
+### 
+
+# Basic data manipulation
+
+**Learning objectives**
+
+-   Learn how to read/write data to/from files with different formats (.tsv, .csv)
+-   Familiarize with basic operations of data frames
+-   Index and subset data frames using base R functions
+-   Manipulate specific data frame columns
+-   Joining by columns and rows
+
+For this section we will use the package `gapminder` that we installed earlier.
+
+```{r}
+library(gapminder)
+dim(gapminder)
+```
+
+View the data frame
+
+```{r}
+View(gapminder)
+```
+
+```{r}
+summary(gapminder$lifeExp)
+```
+
+## Reading/writing data
+
+### Text files
+
+Writing tables to a file using `write.table()`
+
+```{r}
+aust <- gapminder[gapminder$country == "Australia",]
+write.table(aust,
+            file="../data/gapminder_australia.csv",
+            sep=",")
+```
+
+```{r}
+write.table(aust,
+            file="../data/gapminder_australia.csv",
+            sep=",",
+            quote=FALSE, 
+            row.names=FALSE)
+```
+
+```{r}
+write.table(aust,
+            file="../data/gapminder_australia.tsv",
+            sep="\t",
+            quote=FALSE, 
+            row.names=FALSE)
+```
+
+Other functions to write to a file
+
+```{r}
+africa<-gapminder[gapminder$continent=="Africa",]
+write.csv(gapminder[gapminder$continent=="Africa",],
+          file = "../data/gapminder_africa.csv",
+          row.names = FALSE)
+class(africa$continent)
+```
+
+Reading data from a file
+
+```{r}
+africa<-read.csv("../data/gapminder_africa.csv",sep = ",",header = T)
+class(africa$continent)
+head(africa)
+```
+
+```{r}
+africa<-read.table("../data/gapminder_africa.csv",sep = ",",header = T,stringsAsFactors = T)
+class(africa$continent)
+```
+
+### R objects
+
+Using `.RDS` files
+
+```{r}
+saveRDS(africa,file = "../objects/africa.RDS")
+```
+
+```{r}
+africa<-readRDS(file = "../objects/africa.RDS")
+```
+
+Using `.RData` files
+
+```{r}
+americas<-gapminder[gapminder$continent=="Americas",]
+save(africa,americas,file = "../objects/continents.RData")
+```
+
+```{r}
+load(file = "../objects/continents.RData",verbose = T)
+```
+
+## Exploring data frames
+
+### Adding columns and rows
+
+Individually adding columns
+
+```{r}
+mean_children <- sample(1:10,nrow(aust),replace = TRUE)
+aust$mean_children <- mean_children
+
+#head(aust)
+aust$GDP <- aust$pop * aust$gdpPercap
+
+head(aust)
+```
+
+```{r}
+mean_bikes <- sample(1:4,nrow(aust),replace = TRUE) # Check what happens if they don't have the same number of rows
+aust[,"mean_bikes"]<-mean_bikes
+head(aust)
+```
+
+Combining data frames
+
+```{r}
+aust <- gapminder[gapminder$country=="Australia",]
+df <- data.frame(mean_children=sample(1:10,nrow(aust),replace = TRUE),
+               mean_bikes=sample(1:4,nrow(aust),replace = TRUE))
+head(df)
+```
+
+```{r}
+aust <- cbind(aust,df)
+head(aust)
+```
+
+Individually adding rows
+
+```{r}
+new_row<-list("country" = "Australia",
+               "continent" = "Oceania",
+               "year" = 2022,
+               "lifeExp" = mean(aust$lifeExp),
+               "pop" = mean(aust$pop),
+               "gdpPercap" = mean(aust$gdpPercap),
+               "mean_children" = floor(mean(aust$mean_children)),
+               "mean_bikes" = floor(mean(aust$mean_children))) 
+# Why did I create it as list? 
+new_row
+```
+
+```{r}
+aust<-rbind(aust,new_row)
+tail(aust)
+```
+
+Combining data frames by rows
+
+```{r}
+dim(aust)
+aust_double<-rbind(aust,aust)
+dim(aust_double)
+```
+
+### Removing columns and rows
+
+```{r}
+aust<-aust[,-ncol(aust)]# remove the last column
+head(aust)
+
+aust<-aust[,colnames(aust)!="mean_children"]# remove column by name
+head(aust)
+```
+
+```{r}
+dim(aust[-1,]) # Remove the first row
+dim(aust[-1*1:10,]) # Remove the first 10 rows
+```
+
+### Applying filters
+
+```{r}
+aust[aust$lifeExp>=70,] 
+aust[aust$gdpPercap>=mean(aust$gdpPercap),] 
+```
+
+How to get unique entries/remove duplicates
+
+```{r}
+unique(aust_double)
+```
+
+To remove empty rows
+
+```{r}
+# First lets add an empty row
+na.list<-rep(NA,ncol(aust))
+aust<-rbind(aust,na.list)
+tail(aust)
+aust<-aust[!is.na(aust$country),]
+tail(aust)
+```
+
+### Editing specific elements
+
+```{r}
+aust[1,"lifeExp"]<-aust[1,"lifeExp"]+1 
+```
+
+## Hands-on: basic data manipulation
+
+1.  Write a data processing snippet to include only the data points collected after 1995 in Asian countries as a CSV file.\
+2.  Separate the `gapminder` data frame into 5 individual data frames, one for each continent. Store those 5 data frames as an `RData` file called `continents.RData` in the `objects` folder.\
+3.  Finish exploring the `gapminder` data frame and:
+
+-   Find the number of rows and the number of columns\
+-   Print the data type of each column\
+-   Explain the meaning of everything that `str(gapminder)` prints\
+
+4.  In which years has the GDP of Canada been larger than the average of all data points recorded for Canada?\
+5.  Find the mean life expectancy of Switzerland before and after 2000
+6.  You discovered that all the entries from 2007 are actually from 2008. Create a copy of the full `gapminder` data frame in an object called `gp`. Then change the year column to correct the entries from 2007.
+7.  **Bonus -** Find the mean life expectancy and mean gdp per continent using the function `tapply`
+
+```{r}
+
+```
+
+# Advanced data manipulation
+
+**Learning objectives**
+
+-   Become familiar with the `dplyr` syntax
+-   Create pipes with the operator %\>%
+-   Perform operations on data frames using dplyr and tidyr functions
+-   Implement functions from other external packages
+
+There are several packages that allow for more sophisticated processing operations to be done faster. We will take a look at some functions from one of them. I encourage you to look into `plyr` and `tidyr` after this workshop.
+
+## Manipulation with `dplyr`
+
+We often need to select certain observations (rows) or variables (columns), or group the data by certain variable(s) to calculate some summary statistics. Although these operations can be done using base R functions, they require the creation of multiple intermediate objects and a lot of code repetition. There are two packages that provide functions to streamline common operations on tabular data and make the code look nicer and cleaner.
+
+These packages are part of a broader family called `tidyverse`, for more information you can visit <https://www.tidyverse.org/>.
+
+We will cover 5 of the most commonly used functions and combine them using pipes (`%>%`):
+
+1\. `select()` - used to extract data
+
+2\. `filter()` - to filter entries using logical vectors
+
+3\. `group_by()` - to solve the split-apply-combine problem
+
+4\. `summarize()` - to obtain summary statistics
+
+5\. `mutate()` - to create new columns
+
+```{r}
+library(tidyr)
+```
+
+### Introducing pipes
+
+```{r}
+gapminder %>%
+  head()
+gapminder %>%
+  tail()
+```
+
+### Using `select()`
+
+```{r, echo=FALSE, out.width="80%",fig.align='center'}
+knitr::include_graphics("images/select.png")
+```
+
+To subset a data frame
+
+```{r}
+dplyr::select(.data = gapminder, 
+       year, country, gdpPercap) %>%
+  head()
+```
+
+To remove columns
+
+```{r}
+dplyr::select(.data = gapminder, 
+       -continent) %>%
+      head()
+```
+
+```{r}
+gapminder %>% 
+  dplyr::select(year, country, gdpPercap) %>%
+  head()
+```
+
+### Using `filter()`
+
+Include only European countries and select the columns year, country and gdpPercap
+
+```{r}
+gapminder %>%
+    dplyr::filter(continent == "Europe") %>%
+    dplyr::select(year, country, gdpPercap) %>%
+    head()
+```
+
+Using multiple filters at once
+
+```{r}
+gapminder %>%
+  dplyr::filter(continent == "Europe", year == 2007) %>%
+  dplyr::select(country, lifeExp)
+```
+
+Extract unique entries
+
+```{r}
+gapminder %>%
+  dplyr::select(country, continent) %>%
+  dplyr::distinct()
+```
+
+Order according to a column
+
+```{r}
+gapminder %>%
+  dplyr::select(country, continent,year,pop) %>%
+  dplyr::arrange(desc(pop)) %>%
+  head()
+```
+
+### Using `group_by()`
+
+```{r, echo=FALSE, out.width="80%",fig.align='center'}
+knitr::include_graphics("images/groupby.png")
+```
+
+It internally groups observations based on the specified variable(s)
+
+```{r}
+str(gapminder)
+```
+
+```{r}
+str(gapminder %>% dplyr::group_by(continent))
+```
+
+### Using `summarize()`
+
+```{r, echo=FALSE, out.width="80%",fig.align='center'}
+knitr::include_graphics("images/summarize.png")
+```
+
+```{r}
+gdp_c <- gapminder %>%
+          dplyr::group_by(continent) %>%
+          dplyr::summarize(mean_gdpPercap = mean(gdpPercap))
+gdp_c
+```
+
+Combine multiple summary statistics
+
+```{r}
+gapminder %>%
+    dplyr::group_by(continent) %>%
+    dplyr::summarize(mean_le = mean(lifeExp),
+                      min_le = min(lifeExp),
+                      max_le = max(lifeExp),
+                      se_le = sd(lifeExp)/sqrt(dplyr::n()))
+```
+
+### Using `mutate()`
+
+```{r}
+gapminder %>%
+  dplyr::mutate(gdp_billion = gdpPercap*pop/10^9)
+```
+
+### Putting them all together
+
+```{r}
+gdp_pop_ext <-gapminder %>%
+                dplyr::mutate(gdp_billion = gdpPercap*pop/10^9) %>%
+                dplyr::group_by(continent,year) %>%
+                dplyr::summarize(mean_gdpPercap = mean(gdpPercap),
+                                 sd_gdpPercap = sd(gdpPercap),
+                                 mean_pop = mean(pop),
+                                 sd_pop = sd(pop),
+                                 mean_gdp_billion = mean(gdp_billion),
+                                 sd_gdp_billion = sd(gdp_billion)) 
+
+gdp_pop_ext
+```
+
+## Hands-on advanced data manipulation
+
+1.  Write one command (it can span multiple lines) using pipes that will output a data frame that has only the columns `lifeExp`, `country` and `year` for the records before the year 2000 from African countries, but not for other Continents.\
+2.  Calculate the average life expectancy per country. Which country has the longest average life expectancy and which one the shortest average life expectancy?\
+3.  In the previous hands-on you discovered that all the entries from 2007 are actually from 2008. Write a command to edit the data accordingly using pipes. In the same command filter only the entries from 2008 to verify the change.
+
+```{r}
+
+```
+
+# Generating visual outputs
+
+## Graphics with base R
+
+```{r}
+hist(gapminder$lifeExp,xlab="Life expectancy",main = 'Histogram of Life Expectancy')
+```
+
+Arrange figures into multiple panels with `par`
+
+```{r,fig.width=8,fig.height=4}
+df<-gapminder[gapminder$country=="Switzerland",]
+par(mfrow=c(1,3))
+plot(y = df$lifeExp,x=df$year,xlab="Years",ylab="Life expectancy")
+plot(y = df$pop,x=df$year,xlab="Years",ylab="Population size")
+plot(y = df$gdpPercap,x=df$year,xlab="Years",ylab="GDP per capita")
+```
+
+```{r,fig.width=8,fig.height=4}
+df<-gapminder[gapminder$country=="Zimbabwe",]
+par(mfrow=c(1,3))
+plot(y = df$lifeExp,x=df$year,xlab="Years",ylab="Life expectancy")
+plot(y = df$pop,x=df$year,xlab="Years",ylab="Population size")
+plot(y = df$gdpPercap,x=df$year,xlab="Years",ylab="GDP per capita")
+```
+
+## Graphics with ggplot2
+
+```{r}
+library(ggplot2)
+```
+
+We can look at multiple countries at the same time in a prettier way
+
+```{r}
+df<-gapminder %>%
+      dplyr::mutate(country = as.character(country)) %>%
+      dplyr::filter(country %in% c("Switzerland","Australia","Zimbabwe","India"))
+      
+ggplot(df,aes(x=year,y=lifeExp,color=country)) +
+  geom_point()+
+  geom_line()
+
+ggplot(df,aes(x=year,y=gdpPercap,color=country))+
+  geom_point()+
+  geom_line()
+```
+
+Now, let's plot the mean GDP per-capita over time for each continent
+
+```{r}
+gdp_c <- gapminder %>%
+          dplyr::group_by(continent,year) %>%
+          dplyr::summarize(mean_gdpPercap = mean(gdpPercap),
+                           mean_le = mean(lifeExp),
+                           min_le = min(lifeExp),
+                           max_le = max(lifeExp),
+                           se_le = sd(lifeExp)/sqrt(dplyr::n()))
+head(gdp_c)
+```
+
+```{r}
+ggplot(gdp_c,aes(x=year,y=mean_gdpPercap,color=continent))+
+  geom_point()+
+  geom_line()
+```
+
+We can pipe objects directly into the `ggplot()` function:
+
+```{r}
+gdp_c %>% 
+  ggplot(aes(x=year,y=mean_gdpPercap,color=continent))+
+    geom_point()+
+    geom_line()
+```
+
+And even do this:
+
+```{r,message=FALSE}
+gapminder %>%
+  dplyr::group_by(continent,year) %>%
+  dplyr::summarize(mean_gdpPercap = mean(gdpPercap)) %>%
+  ggplot(aes(x=year,y=mean_gdpPercap,color=continent))+
+    geom_point()+
+    geom_line()
+```
+
+#### Exercise
+
+Plot the life expectancy over time of all countries for the years with population size larger than 2+06
+
+```{r}
+
+```
+
+### Some ggplot tricks
+
+Make sure your data is in the right format (wide vs long). Usually, ggplot requires the data in long format. The functions `tidyr::pivot_wider()` and `tidyr::pivot_longer()` are very useful to transform one into the other.
+
+```{r, echo=FALSE, out.width="80%",fig.align='center'}
+knitr::include_graphics("images/DataFggplotpng.png")
+```
+
+```{r,eval=FALSE}
+?tidyr::pivot_wider()
+?tidyr::pivot_longer()
+```
+
+To change the order of colors, modify the factor levels
+
+```{r,message=FALSE}
+gapminder %>%
+  dplyr::group_by(continent,year) %>%
+  dplyr::mutate(continent = factor(as.character(continent),
+                                   levels = c("Oceania","Europe","Africa","Americas","Asia"))) %>%
+  dplyr::summarize(mean_gdpPercap = mean(gdpPercap)) %>%
+  ggplot(aes(x=year,y=mean_gdpPercap,color=continent))+
+    geom_point()+
+    geom_line()
+```
+
+You can store the plots in an object and keep adding layers to it
+
+```{r,message=FALSE}
+p<-gapminder %>%
+    dplyr::group_by(continent,year) %>%
+    dplyr::mutate(continent = factor(as.character(continent),
+                                     levels = c("Oceania","Europe","Africa","Americas","Asia"))) %>%
+    dplyr::summarize(mean_gdpPercap = mean(gdpPercap)) %>%
+    ggplot(aes(x=year,y=mean_gdpPercap,color=continent))+
+      geom_point()+
+      geom_line()
+
+# Change the color palette
+p + scale_color_viridis_d(begin = 0.1,end=0.8)
+```
+
+# Real life application
+
+1.  How many clinics participated in the study, and how many valid tests were performed on each one? Did the number of daily tests vary over time?
+2.  How many patients tested positive vs negative in the first 100 days of the pandemic? Do you notice any difference with the age of the patients? Hint: You can make two age groups and calculate the percentage each age group in positive vs negative tests, try using the function `ifelse()` to do this.
+3.  Look at the specimen processing time to receipt, did the sample processing times improve over the first 100 days of the pandemic? Plot the median processing times of each day over the course of the pandemic and then compare the summary statistics of the first 50 vs the last 50 days
+4.  **Bonus:** Higher viral loads are detected in less PCR cycles. What can you observe about the viral load of positive vs negative samples. Do you notice anything differences in viral load across ages in the positive samples? Hint: Also split the data into two age groups and try using `geom_boxplot()`
+
+```{r}
+library(medicaldata)
+covid<-covid_testing
+dim(covid)
+```
+
+# Software development concepts
+
+## Good coding practices
+
+### Script structure
+
+-   Use comments to create sections.
+-   Load all required packages at the very beginning.
+-   Write all function definitions after package loading section or create a standalone file for your functions and call it in the main code.
+
+### Functions
+
+Identify functions capitalizing the first letter of each word
+
+```{r,eval=F}
+# Good
+DoNothing <- function() {
+  return(invisible(NULL))
+}
+
+# Bad
+donothing <- function() {
+  return(invisible(NULL))
+}
+```
+
+Use explicit returns
+
+```{r,eval=F}
+# Good
+AddValues <- function(x, y) {
+  return(x + y)
+}
+
+# Bad
+AddValues <- function(x, y) {
+  x + y
+}
+```
+
+Define what the functions does, the input parameters, and output using comments inside the function
+
+```{r,eval=F}
+AddValues <- function(x, y) {
+  
+  # Description: Function to add to numeric variables
+  # Input
+  # x = numeric
+  # y = numeric 
+  # Output: numeric
+  
+  return(x + y)
+}
+```
+
+Testing and documenting
+
+-   Use formal documentation for functions whenever you are writing more complicated projects. This documentation is written in separate `.Rd` files,and it turns into the documentation printed in the help files.
+-   The `roxygen2` package allows R coders to write documentation alongside the function code and then process it into the appropriate `.Rd` files.
+-   Formal automated tests can be written using the `testthat` package.
+
+### External packages
+
+-   Packages are essentially bundles of functions with formal documentation. Loading your own functions through `source("functions.R")` is similar to loading someone else’s using `library("package")`
+
+-   As a general rule, only load a package using `library()` if you are going to use more than two functions from if.
+
+-   Use the name space when calling an external function. Not doing it can cause clashes when two packages have a function with the same name.
+
+```{r,eval=F}
+# Good
+purrr::map()
+
+# Bad
+map()
+```
+
+## Debugging and troubleshooting
+
+General advice:
+
+-   Create a minimal reproducible example of your error.\
+-   Whenever you see an error copy the full message and paste it in the search bar on your web browser. There is a lot of support out there, and most likely someone came across that same error before.
+
+# References
+
+-   [Base R Cheat Sheet](https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf)\
+-   [Google's R Style Guide](https://google.github.io/styleguide/Rguide.html)
+-   [Mastering Software Development in R](https://bookdown.org/rdpeng/RProgDA/)
+-   [R for reproducible statistical analysis](https://swcarpentry.github.io/r-novice-gapminder/)
+-   [Medicaldata - covid testing dataset](https://htmlpreview.github.io/?https://github.com/higgi13425/medicaldata/blob/master/man/description_docs/covid_desc.html)

@@ -1,0 +1,145 @@
+---
+title: "Intro to R"
+author: 
+- name: "Adrien Osakwe"
+  affiliation: "Workshop Lead"
+- name: "Larisa M. Soto"
+  affiliation: "Original Material"
+- name: Xiaoqi Xie
+  affiliation: Contributor  
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+   rmdformats::html_clean:
+    toc: true
+    thumbnails: false
+    floating: true
+    highlight: kate
+    use_bookdown: true
+    code_folding: hide
+    df_print: paged
+---
+
+```{r, echo=FALSE, out.width="80%",fig.align='center'}
+knitr::include_graphics("images/MiCM_Logo.png")
+```
+
+# Solutions || Medical Data
+```{r}
+suppressPackageStartupMessages(library(ggplot2)) 
+suppressPackageStartupMessages(library(medicaldata))
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(tidyr))
+```
+
+Use the `covid_testing` data set and everything you've learned so far to answer the following questions:
+
+## Clinics included
+
+**How many clinics participated in the study, and how many valid tests were performed on each one? Did the testing trend vary over time?**
+
+```{r}
+covid<-covid_testing
+```
+
+### Number of clinics
+
+```{r}
+clinics<- covid %>%
+          dplyr::select(subject_id,clinic_name,result,pan_day) %>%
+          dplyr::distinct()
+length(unique(clinics$clinic_name))
+```
+
+### Number of valid tests
+
+```{r}
+clinics %>%
+  dplyr::filter(result!="invalid") %>%
+  dplyr::group_by(clinic_name) %>%
+  dplyr::summarize(n_test = length(clinic_name)) %>%
+  dplyr::arrange(desc(n_test))
+```
+
+### Testing trend over time
+
+```{r}
+covid %>%
+  filter(pan_day<=100) %>%
+  group_by(pan_day) %>%
+  summarize(n=length(result)) %>%
+  ggplot(.,aes(x=pan_day,y=n))+
+    geom_point()+
+    geom_line()+
+    ylab("Number of tests per day")+
+    xlab("Pandemic day")
+```
+
+## Number of positive tests
+
+**How many patients tested positive vs negative in the first 100 days of the pandemic? Do you notice any difference with the age of the patients? Hint: You can make two age groups and calculate the percentage each age group in positive vs negative tests.**
+
+### Number of positive tests in the first 100 days
+
+```{r}
+covid %>%
+  filter(result!="invalid" & pan_day<=100) %>%
+  group_by(result) %>%
+  summarize(n=length(subject_id))
+```
+
+### Tests by age group
+
+```{r}
+tsts_age<-covid %>%
+            filter(result!="invalid" & pan_day<=100) %>%
+            mutate(age_group=ifelse(age<=21,"children","adults")) %>%
+            group_by(age_group,result) %>%
+            summarize(n=length(subject_id)) %>%
+            mutate(percent_total=n/sum(n)*100)
+tsts_age
+```
+
+## Processing times
+
+**Look at the specimen processing time to receipt, did the sample processing times improve over the first 100 days of the pandemic? Plot the median processing times of each day over the course of the pandemic and then compare the summary statistics of the first 50 vs the last 50 days**
+
+```{r}
+covid %>%
+  group_by(pan_day) %>%
+  dplyr::summarise(median_col_rec_tat=median(col_rec_tat)) %>%
+  ggplot(.,aes(x=pan_day,y=median_col_rec_tat)) +
+  geom_point()+
+  geom_line()
+```
+
+```{r}
+covid %>%
+  mutate(pan_day_group=ifelse(pan_day<50,"first_50","last_50")) %>%
+  group_by(pan_day_group) %>%
+  dplyr::summarise(mean_col_rec_tat=mean(col_rec_tat),
+                   median_col_rec_tat=median(col_rec_tat),
+                   min_col_rec_tat=min(col_rec_tat),
+                   max_col_rec_tat=max(col_rec_tat))
+```
+
+## Bonus - Viral load
+
+**Higher viral loads are detected in less PCR cycles.**
+
+**What can you observe about the viral load of positive vs negative samples.**
+
+**Do you notice anything differences in viral load across ages in the positive samples?**
+
+**Hint: Also split the data into two age groups and try using geom_boxplot()**
+
+```{r,warning=FALSE}
+ggplot(covid,aes(y=ct_result,x=result,color=result))+
+  geom_boxplot()
+```
+
+```{r,warning=FALSE}
+covid %>%
+  mutate(age_group=ifelse(age<=21,"children","adults")) %>%
+  ggplot(.,aes(y=ct_result,x=result,color=age_group))+
+    geom_boxplot()
+```

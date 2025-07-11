@@ -1,0 +1,116 @@
+---
+title: "Intro to R"
+author: 
+- name: "Adrien Osakwe"
+  affiliation: Workshop Lead
+- name: Larisa M. Soto
+  affiliation: Original Material
+- name: Xiaoqi Xie
+  affiliation: Contributor
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+   rmdformats::html_clean:
+    toc: false
+    thumbnails: false
+    highlight: kate
+    use_bookdown: true
+    code_folding: hide
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,eval=TRUE)
+
+```
+
+# Solutions || Basic Data Manipulation
+```{r, echo=FALSE, out.width="80%",fig.align='center'}
+knitr::include_graphics("images/MiCM_Logo.png")
+```
+
+
+```{r}
+library(gapminder)
+```
+
+
+## Writing data 
+
+Write a data processing snippet to include only the data points collected after 1995 in Asian countries as a CSV file
+
+```{r,eval=F}
+asia<-gapminder[gapminder$year > 1995 & gapminder$continent=="Asia", ]
+write.table(asia,
+            file = "data/gapminder_after1995_asia.csv",
+            sep = ",", 
+            quote = FALSE, 
+            row.names = FALSE)
+```
+
+
+Separate the `gapminder` data frame into 5 individual data frames, one for each continent. Store those 5 data frames as an `RData` file in the `objects` folder called `continents.RData`. 
+
+```{r,eval=FALSE}
+asia<-gapminder[gapminder$continent=="Asia", ]
+africa<-gapminder[gapminder$continent=="Africa", ]
+oceania<-gapminder[gapminder$continent=="Oceania", ]
+europe<-gapminder[gapminder$continent=="Europe", ]
+americas<-gapminder[gapminder$continent=="Americas", ]
+
+save(asia,africa,oceania,europe,americas,file="objects/continents.RData")
+```
+
+## Exploring data frames 
+
+Finish exploring the `gapminder` data frame and:
+
+- Find the number of rows and the number of columns   
+- Print the data type of each column    
+- Explain the meaning of everything that `str(gapminder)` prints   
+
+```{r,eval=F}
+dim(gapminder)
+
+typeof(gapminder$country)
+typeof(gapminder$continent)
+typeof(gapminder$year)
+typeof(gapminder$lifeExp)
+typeof(gapminder$pop)
+typeof(gapminder$gdpPercap)
+
+str(gapminder)
+```
+
+
+In which years has the GDP of Canada been larger than the average of all data points?     
+
+```{r,eval=F}
+canada<-gapminder[gapminder$country=="Canada",]
+mgdp<-mean(canada$gdpPercap)
+canada[canada$gdpPercap>mgdp,"year"]
+```
+
+Find the mean life expectancy of Switzerland  before and after 2000 
+
+```{r,eval=F}
+swiss<-gapminder[gapminder$country=="Switzerland",]
+mean(swiss[swiss$year<2000,]$lifeExp) # Before
+mean(swiss[swiss$year>2000,]$lifeExp) # After
+```
+
+You discovered that all the entries from 2007 are actually from 2008. Create a copy of the full `gapminder` data frame in an object called `gp`. Then change the year column to correct the entries from 2007.
+
+```{r,eval=F}
+gp<-gapminder
+gp[gp$year==2007,"year"]<-2008
+gp[gp$year==2008,]
+```
+
+**Bonus -**  Find the mean life expectancy and mean gdp per continent using the function `tapply` 
+
+```{r,eval=F}
+tapply(gapminder$lifeExp,gapminder$continent,mean)
+```
+
+```{r,eval=F}
+tapply(gapminder$lifeExp,gapminder$continent,mean)
+```
